@@ -1,0 +1,305 @@
+QUESTAO 01) 13
+QUESTAO 02) 256 
+
+QUESTAO 03)
+ 
+public palindromo(palavra: string): boolean {
+	var arrayPalavra = palavra.split('');
+
+	if (this.revertendoPalavra(arrayPalavra) === palavra) {
+		console.log("é um  palíndroma")
+		return true;
+	}
+	else {
+		console.log(" NÃO é a merda de uma  palíndroma")
+		return false;
+	}
+}
+
+private revertendoPalavra(arrayPalavra: string[]): string {
+	var arrayPalavraInversa = arrayPalavra.reverse();;
+
+	var palavraInversa: string = "";
+
+	arrayPalavraInversa.forEach(posicaoArray => {
+		palavraInversa += posicaoArray
+	});
+
+	return palavraInversa;
+}
+
+
+-----------------------------------------------------------------------------------------------
+QUESTAO 04 A
+ 	
+	SELECT 
+		V.MATRICULA  
+ 	FROM FUNCIONARIO F 
+	INNER JOIN VINCULO V ON 
+		V.FUNCIONARIO = F.VINCULO
+	ORDER BY F.NASCIMENTO DESC;
+
+
+QUESTAO 04 B
+ 	
+	SELECT 
+		F.CPF,
+		F.NOME 
+ 	FROM FUNCIONARIO F 
+ 	WHERE 3 < (SELECT COUNT (MATRICULA)
+ 				FROM VINCULO V 
+				WHERE V.FUNCIONARIO = F.VINCULOS )
+
+QUESTAO 04 C
+
+	SELECT 
+		F.CPF,
+		F.NOME,
+		F.NASCIMENTO,
+		F.MAE,
+		F.PAI,
+		F.VINCULOS
+ 	FROM FUNCIONARIO F 
+	LEFT JOIN VINCULO V ON
+		F.VINCULOS = V.FUNCIONARIO
+	WHERE F.VINCULOS IS NULL 
+
+
+
+
+
+QUESTAO 04 D
+
+	SELECT 
+ 		F.CPF, F.NOME, F.NASCIMENTO, F.MAE, F.PAI, F.VINCULOS
+ 	FROM FUNCIONARIO F
+	 INNER JOIN VINCULO V ON 
+ 		V.FUNCIONARIO = F.VINCULOS
+	INNER JOIN LOTACAO L ON 
+		L.VINCULO = F.LOTACOES
+	INNER JOIN PROFESSOR P ON 
+		P.LOTACAO.ID = L.ID 
+	INNER JOIN TECNICO T ON 
+		T.LOTACAO.ID = LT.ID 
+	WHERE L.ANOLETIVO = 2021
+
+
+QUESTAO 04 E
+
+	SELECT
+		P.ID,P.TURMA,P.DISCIPLINA,
+		T.ID,T.ATIVIDADE ,
+		L.ID,L.INICIO,L.FIM
+	FROM LOTACAO L
+	INNER JOIN VINCULO V ON 
+		V.LOTACOES = L.VINCULO 
+	INNER JOIN PROFESSOR P ON 
+		P.LOTACAO.ID = L.ID 
+	INNER JOIN TECNICO T ON 
+		T.LOTACAO.ID = LT.ID
+	WHERE V.MATRICULA = '91471'
+	AND L.ANOLETIVO = 2021 
+
+
+
+------------------------------------------------------------------------------
+QUESTAO 05
+
+
+
+
+
+package com.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Funcionario {
+	
+	@Cpf
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	private Long cpf
+	private String nome
+	private	Date nascimento
+	private	String mae
+	private	String pai
+	private	int vinculos
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getCpf() {
+		return cpf;
+	}
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+	
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+
+	public String getMae() {
+		return mae;
+	}
+	
+	public void setMae(String mae) {
+		this.mae = mae;
+	}
+
+	public String getPai() {
+		return pai;
+	}
+	
+	public void setUserName(String pai) {
+		this.pai = pai;
+	}
+
+	public Vinculo getVinculos() {
+		return Vinculos;
+	}
+	
+	public void setVinculos(Vinculo Vinculos) {
+		this.vinculos = vinculos;
+	}
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+package com.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Vinculo {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+
+
+
+	private int id
+	private Funcionario funcionario
+	private String matricula
+	private Date vacancia
+	private Lotacao lotacoes 
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public Long getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(Long funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getMtricula() {
+		return matricula;
+	}
+	
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public Date getVacancia() {
+		return vacancia;
+	}
+	
+	public void setVacancia(Date vacancia) {
+		this.vacancia = vacancia;
+	}
+
+	public Lotacao getLotacoes() {
+		return lotacoes;
+	}
+	
+	public void setLotacoes(Lotacao lotacao) {
+		this.lotacoes = lotacoes;
+	}
+
+
+}
+---------------------------------------------------------------------------------------
+
+
+
+package com.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.model.Funcionario;
+import com.repository.FuncionarioRepository;
+
+@RestController
+@RequestMapping("/funcionario")
+
+public class FucionarioController {
+		
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;	
+		
+	@PostMapping
+	public Funcionario post(@RequestBody Funcionario parametro) {
+		return this.funcionarioRepository.save(parametro);
+	}
+
+	@GetMapping("{id}")
+	public Funcionario funcionario(@PathVariable("id") Long id) {
+		Funcionario funcionario = funcionarioRespository.findById(id).orElseThroew ( () -> new ResourceNotFoundException (" Funcionario não encontrado para este id :: " + id));
+		return Funcionario.ok().body(funcionario)
+	}
+
+}
+
+
+

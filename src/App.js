@@ -3,37 +3,101 @@ import './App.css';
 import { Component } from 'react';
 import FormularioBusca from './Components/FormularioBusca';
 import ListaProdutos from './Components/ListaProdutos';
-import CarrinhoDeCompras from './Components/CarrinhoDeCompras';
+import CarrinhoDeCompras from './Components/CarrinhoDeCompras.jsx';
 
 
 const listaProdutos = [
   {
-    "id": 1,
-    "codigo": "01",
-    "titulo": "Feijão",
-    "descricao": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
-    "preco": 5.44,
-    "quantidadeEstoque": 5,
-    "quantidadeSolicitada": 1
+      "id":1,
+      "codigo":"01",
+      "titulo":"Feijão",
+      "descricao":"Feijão de corda",
+      "preco": 5.50,
+      "quantidadeEstoque":5,
+      "quantidadeSolicitada": 1
   },
   {
-    "id": 2,
-    "codigo": "02",
-    "titulo": "Arroz",
-    "descricao": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
-    "preco": 4.35,
-    "quantidadeEstoque": 10,
-    "quantidadeSolicitada": 1
+      "id":2,
+      "codigo":"02",
+      "titulo":"Arroz",
+      "descricao":"Arroz branco",
+      "preco": 4.75,
+      "quantidadeEstoque":5,
+      "quantidadeSolicitada": 1
   },
   {
-    "id": 3,
-    "codigo": "03",
-    "titulo": "Macarrão",
-    "descricao": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
-    "preco": 3.70,
-    "quantidadeEstoque": 9,
-    "quantidadeSolicitada": 1
-  }
+      "id":3,
+      "codigo":"03",
+      "titulo":"Macarrão",
+      "descricao":"Macarrão spaghetti",
+      "preco": 3.99,
+      "quantidadeEstoque":5,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":4,
+      "codigo":"04",
+      "titulo":"Oleo",
+      "descricao":"Oleo lisa",
+      "preco": 2.90,
+      "quantidadeEstoque":5,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":5,
+      "codigo":"05",
+      "titulo":"Carne",
+      "descricao":"Carne bovina",
+      "preco": 2.00,
+      "quantidadeEstoque":10,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":6,
+      "codigo":"06",
+      "titulo":"Linguiça",
+      "descricao":"Linguiça calabresa",
+      "preco": 1.00,
+      "quantidadeEstoque":10,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":7,
+      "codigo":"07",
+      "titulo":"Refrigerante",
+      "descricao":"Refrigerante Coca Cola",
+      "preco": 7.00,
+      "quantidadeEstoque":7,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":8,
+      "codigo":"08",
+      "titulo":"Margarina",
+      "descricao":"Margarina qualy",
+      "preco": 2.70,
+      "quantidadeEstoque":7,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":9,
+      "codigo":"09",
+      "titulo":"Açucar",
+      "descricao":"Açucar mascavo",
+      "preco": 3.89,
+      "quantidadeEstoque":7,
+      "quantidadeSolicitada": 1
+  },
+  {
+      "id":10,
+      "codigo":"10",
+      "titulo":"Agua",
+      "descricao":"Agua Indaia ",
+      "preco": 3.00,
+      "quantidadeEstoque":15,
+      "quantidadeSolicitada": 1
+  },
+
 ];
 
 class App extends Component {
@@ -86,7 +150,7 @@ class App extends Component {
     return (
       <div className="container pt-5">
         <div className="row">
-          <h2>Carrinhos de Compras</h2>
+          <h1>Compras</h1>
           <FormularioBusca buscarProduto={this.buscarProduto.bind(this)} />
         </div>
 
